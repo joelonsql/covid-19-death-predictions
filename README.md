@@ -5,7 +5,7 @@ Amateur COVID-19 modelling in R
 
 ### 2020-03-29
 
-![(https://github.com/joelonsql/covid-19-death-predictions/blob/master/2020-03-29a.png?raw=true)](https://rpubs.com/purrpurr/591606)
+![[Foo](https://github.com/joelonsql/covid-19-death-predictions/blob/master/2020-03-29a.png?raw=true)](https://rpubs.com/purrpurr/591606)
 
 ```
 Model fitted: Log-logistic (ED50 as parameter) (3 parms)
