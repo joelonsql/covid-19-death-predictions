@@ -64,3 +64,4 @@ data %>%
   add_segments(x = inflection_date, xend = inflection_date, color = "Inflektionspunkt", alpha=0.5, y = 0, yend = deceased) %>%
   add_segments(x = today, xend = today, color = "Dagens datum", alpha=0.5, y = 0, yend = deceased)
 
+summary(model)
