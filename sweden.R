@@ -2,8 +2,11 @@ library(tidyverse)
 library(plotly)
 library(drc)
 
-deaths      <- c( 1, 1, 1, 2, 3, 7, 8,10,12,16,20,23,33,36,42,66,92,102,NA)
-predictions <- c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,124)
+first_death <- as.Date("2020-03-11")
+deaths      <- c( 1, 1, 1, 2, 3, 7, 8,10,12,16,20,23,33,36,42,66,92,102)
+predictions <- c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA, NA)
+
+today <- Sys.Date()
 
 data <- data.frame(deaths=deaths,day=1:length(deaths),predictions=predictions)
 
@@ -12,53 +15,52 @@ model <- drm(deaths ~ day, data = data, fct = LL.4(fixed=c(NA,0,NA,NA)))
 steepness <- model$coefficients["b:(Intercept)"]
 deceased <- model$coefficients["d:(Intercept)"]
 inflection <- model$coefficients["e:(Intercept)"]
-inflection_date <- Sys.Date() - max(data$day) + as.integer(inflection)
-final_date <- Sys.Date() - max(data$day) + as.integer(inflection)*2
+inflection_date <- first_death + as.integer(inflection) - 1
 
-predict_deceased <- function(x) {
-  as.integer(deceased - deceased/(1 + (x/inflection)^(-steepness)))
+predict_deceased <- function(day) {
+  as.integer(deceased - deceased/(1 + (day/inflection)^(-steepness)))
 } 
 
-data$model <- predict_deceased(data$day)
+data$model <- NA
 
-max_day <- max(data$day)
-next_day <- max(data$day) + 1
-end_day <- as.integer(2*inflection)
-end_day <- max(end_day, next_day+30)
+predict_day <- length(deaths) + 1
+end_day <- max(as.integer(2*inflection), predict_day+7)
 
-for (x in next_day:end_day) {
+for (day in predict_day:end_day) {
   data <- add_row(data,
-      day = x,
+      day = day,
       deaths = NA,
       predictions = NA,
-      model = predict_deceased(x)
+      model = predict_deceased(day)
   )
 }
 
-data$day <- Sys.Date() - (max_day - data$day)
+# Convert day from integer to date
+data$day <- first_death + data$day - 1
+predict_day <- first_death + predict_day - 1
 
-predict_total_today <- filter(data,day==Sys.Date())$model
-predict_new_today <- predict_total_today - filter(data,day==Sys.Date()-1)$deaths
+predict_total <- filter(data,day==predict_day)$model
+predict_new <- predict_total - filter(data,day==predict_day-1)$deaths
 
 data %>%
   plot_ly(
     x = ~day,
-    y = ~model,
-    color = "Ny prognos",
+    y = ~deaths,
+    color = "Historik",
     type = "scatter",
-    mode = "lines"
+    mode = "markers+lines"
   ) %>%
-  add_markers(y = ~deaths, color="Historik") %>%
-  add_markers(y = ~predictions, color="Gamla prognoser", alpha=0.5, size=2) %>%
+  add_lines(x = ~day, y = ~model, color="Framtida prognos") %>%
+  add_markers(y = ~predictions, color="Tidigare prognoser", alpha=0.5, size=2) %>%
   layout(
     title = paste(
-      "COVID-19 - Estimerad dödskurva - Sverige",
-      "\nDagens prognos ", Sys.Date(), " : ", predict_total_today, " (+", predict_new_today, ")",
+      "COVID-19 - Dödsprognos - Sverige",
+      "\nPrognos för ", predict_day, " : ", predict_total, " totalt varav ", predict_new, " nya",
       sep=""
     ),
     yaxis = list(title="Antal döda", type="log"),
     xaxis = list(title="Datum")
   ) %>%
-  add_segments(x = inflection_date, xend = inflection_date, color = I("black"), y = 0, yend = deceased, showlegend = FALSE) %>%
-  add_segments(x = Sys.Date(), xend = Sys.Date(), color = I("black"), y = 0, yend = deceased, showlegend = FALSE)
+  add_segments(x = inflection_date, xend = inflection_date, color = "Inflektionspunkt", alpha=0.5, y = 0, yend = deceased) %>%
+  add_segments(x = today, xend = today, color = "Dagens datum", alpha=0.5, y = 0, yend = deceased)
 
