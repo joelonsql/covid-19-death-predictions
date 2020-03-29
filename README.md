@@ -24,6 +24,8 @@ Residual standard error:
  4.791973 (15 degrees of freedom)
 ```
 
+### 2020-03-30
+
 [![](https://github.com/joelonsql/covid-19-death-predictions/blob/master/2020-03-30.png?raw=true)](https://rpubs.com/purrpurr/591611)
 
 ```
