@@ -3,8 +3,8 @@ library(plotly)
 library(drc)
 
 first_death <- as.Date("2020-03-11")
-deaths      <- c( 1, 1, 1, 2, 3, 7, 8,10,12,16,20,23,33,36,42,66,92,102,110)
-predictions <- c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA, NA,124)
+deaths      <- c( 1, 1, 1, 2, 3, 7, 8,10,12,16,20,23,33,36,42,66,92,102,110,146)
+predictions <- c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA, NA,124,136)
 
 today <- Sys.Date()
 
