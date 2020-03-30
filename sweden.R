@@ -26,14 +26,12 @@ data$model <- NA
 predict_day <- length(deaths) + 1
 end_day <- max(as.integer(2*inflection), predict_day+7)
 
-for (day in predict_day:end_day) {
-  data <- add_row(data,
-      day = day,
-      deaths = NA,
-      predictions = NA,
-      model = predict_deceased(day)
-  )
-}
+data <- data %>% add_row(
+  day = predict_day:end_day,
+  deaths = NA,
+  predictions = NA,
+  model = sapply(predict_day:end_day, predict_deceased)
+)
 
 # Convert day from integer to date
 data$day <- first_death + data$day - 1
