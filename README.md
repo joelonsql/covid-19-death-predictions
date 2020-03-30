@@ -1,7 +1,16 @@
 # covid-19-death-predictions
-Amateur COVID-19 modelling in R
+Amatör COVID-19 modellering i R
 
-## Sweden
+## Sverige
+
+Tabell nedan visar tidigare prognoser och aktuell prognos för nästa dag,
+samt faktiskt utfall enligt Folkhälsomyndigheten.
+
+Datum | Prognos | Facit | Fel
+--- | --- | --- | ---
+2020-03-29 | 124 (+22) | 110 (+8) | +14
+2020-03-30 | 136 (+26) | 146 (+36) | -10
+2020-03-31 | 167 (+21) | |
 
 ### 2020-03-29
 
