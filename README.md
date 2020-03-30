@@ -1,5 +1,10 @@
-# covid-19-death-predictions
-Amatör COVID-19 modellering i R
+# Amatör COVID-19 modellering i R
+
+Denna sida uppdateras dagligen strax efter kl 14:00 då Folkhälsomyndigheten publicerar data för gårdagen.
+
+Det enda antagandet i modellen är att utvecklingen borde följa en s k "logistic curve".
+
+Indata från Folkhälsomyndigheten: https://experience.arcgis.com/experience/09f821667ce64bf7be6f9f87457ed9aa
 
 ## Sverige
 
