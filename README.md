@@ -79,3 +79,24 @@ Residual standard error:
 
  5.212881 (17 degrees of freedom)
 ```
+
+### 2020-04-01
+
+[![](https://github.com/joelonsql/covid-19-death-predictions/blob/master/2020-04-01.png?raw=true)](https://rpubs.com/purrpurr/592511)
+
+```
+Model fitted: Log-logistic (ED50 as parameter) (3 parms)
+
+Parameter estimates:
+
+                 Estimate  Std. Error  t-value   p-value    
+b:(Intercept)    -3.64214     0.16781 -21.7039 2.346e-14 ***
+d:(Intercept)  9470.15098 19061.21207   0.4968    0.6253    
+e:(Intercept)    62.54790    36.62612   1.7077    0.1049    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error:
+
+ 5.410101 (18 degrees of freedom)
+```

@@ -1,0 +1,13 @@
+name: covid-19-death-predictions
+title: covid-19-death-predictions
+username:
+account: joelonsql
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2023153
+bundleId: 2948739
+url: https://joelonsql.shinyapps.io/covid-19-death-predictions/
+when: 1585659704.45228
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|2020-03-29.png|2020-03-30.png|2020-03-31.png|LICENSE|README.md|sweden.R
